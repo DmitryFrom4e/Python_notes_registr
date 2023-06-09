@@ -43,3 +43,27 @@ def list_notes(date):
             print(f"Title: {note['title']}")
             print(f"Message: {note['message']}")
             print(f"Date: {note['date']}")
+            
+def edit_note(note_id):
+    with open(NOTES_FILE, "r") as f:
+        data = json.load(f)
+        
+    note_found = False
+    
+    for note in data["notes"]:
+        if note["id"] == note_id:
+            title = input("Enter new title: ")
+            message = input("Enter new message: ")
+            note["title"] = title
+            note["message"] = message
+            note["date"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            note_found = True
+            break
+    
+    if not note_found:
+        print(f"Note with the ID {note_id} was not found")
+    else:
+        with open(NOTES_FILE, "w") as f:
+            json.dump(data, f, indent=4)
+        
+        print(f"Note {note_id} edited successfully!")
