@@ -24,3 +24,22 @@ def add_note():
         json.dump(data, f, indent=4)
     
     print(f"Note with the ID {id} added successfully!")
+    
+def list_notes(date):
+    with open(NOTES_FILE, "r") as f:
+        data = json.load(f)
+        
+    if date:
+        notes = [note for note in data["notes"] if note["date"] == date]
+    else:
+        notes = data["notes"]
+        
+    if len(notes) == 0:
+        print("No notes found!")
+    else:
+        for note in notes:
+            print("="*30)
+            print(f"ID: {note['id']}")
+            print(f"Title: {note['title']}")
+            print(f"Message: {note['message']}")
+            print(f"Date: {note['date']}")
