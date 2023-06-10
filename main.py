@@ -1,6 +1,7 @@
 import argparse
 
-from notes_exec import add_note, list_notes, edit_note, remove_note
+from notes_exec import add_note, edit_note, list_notes, remove_note
+
 
 def main():
     parser = argparse.ArgumentParser(usage='python main.py [-h] [-a] [-l] [-d DATE] [-e EDIT] [-r REMOVE]', description='Note register app')
@@ -22,6 +23,6 @@ def main():
         remove_note(args.remove)
     else:
         print("No command entered. Use --help for help menu.")
-        
+        parser.print_help()
 if __name__ == '__main__':
     main()
