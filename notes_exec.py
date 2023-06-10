@@ -67,3 +67,22 @@ def edit_note(note_id):
             json.dump(data, f, indent=4)
         
         print(f"Note {note_id} edited successfully!")
+        
+def remove_note(note_id):
+    with open(NOTES_FILE, "r") as f:
+        data = json.load(f)
+        
+    note_found = False
+    
+    for note in data["notes"]:
+        if note["id"] == note_id:
+            data["notes"].remove(note)
+            note_found = True
+            
+    if not note_found:
+        print(f"Note with the ID {note_id} was not found")
+    else:
+        with open(NOTES_FILE, "w") as f:
+            json.dump(data, f, indent=4)
+        
+        print(f"Note with the ID {note_id} removed successfully!")

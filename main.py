@@ -1,6 +1,6 @@
 import argparse
 
-from notes_exec import add_note, list_notes, edit_note
+from notes_exec import add_note, list_notes, edit_note, remove_note
 
 def main():
     parser = argparse.ArgumentParser(usage='python main.py [-h] [-a] [-l] [-d DATE] [-e EDIT] [-r REMOVE]', description='Note register app')
@@ -8,6 +8,7 @@ def main():
     parser.add_argument("-l", "--list", help="List all notes", action="store_true")
     parser.add_argument("-d", "--date", help="Filter notes by date")
     parser.add_argument("-e", "--edit", help="Edit a note", type=int)
+    parser.add_argument("-r", "--remove", help="Remove a note", type=int)
     
     args = parser.parse_args()
 
@@ -17,6 +18,8 @@ def main():
         list_notes(args.date)
     elif args.edit:
         edit_note(args.edit)
+    elif args.remove:
+        remove_note(args.remove)
     else:
         print("No command entered. Use --help for help menu.")
         
