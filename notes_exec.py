@@ -30,7 +30,8 @@ def list_notes(date):
         data = json.load(f)
         
     if date:
-        notes = [note for note in data["notes"] if note["date"] == date]
+        str_date = date.isoformat()
+        notes = [note for note in data["notes"] if str(note["date"]).startswith(str_date)]
     else:
         notes = data["notes"]
         
